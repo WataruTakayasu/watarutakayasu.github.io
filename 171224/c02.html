@@ -46,6 +46,11 @@
                 var calcium = new createjs.Sprite(calciumSpriteSheet,'stand');
                 calcium.x = 100;
                 calcium.y = 300;
+                createjs.Tween.get(calcium).wait(1000).to({alfa:1},1000);
+                //クリックしたら
+                calcium.addEventListener('click',function(){
+                    createjs.Tween.get(calcium).to({x:400},2000);
+                })
 
 
             }
