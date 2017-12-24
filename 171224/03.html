@@ -20,12 +20,12 @@
         console.log('読み込んだよ');
 
         //GPSからの緯度経度の取得
-        navigator.geoLocation.getCurrentPosition(function(pos){
+        navigator.geolocation.getCurrentPosition(function(pos){
 
             console.log(pos);
 
-            var lat = pos.cords.latitube;//緯度
-            var lon = pos.cords.longitube;//経度
+            var lat = pos.coords.latitube;//緯度
+            var lon = pos.coords.longitube;//経度
 
             lat = calLocation(lat);
             lon = calLocation(lon);
@@ -33,7 +33,16 @@
 
             console.log('lat: ' + lat, 'lon: ' + lon);
 
+            setWeather(lat,lon);//緯度経度を受け渡しする
+
         });
+
+        //天気を表示する関数
+        function setWeather(lat,lon){
+
+            
+
+        }
 
         //小数点2桁で切り捨てる関数
         function calLocation(num){
