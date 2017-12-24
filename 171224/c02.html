@@ -14,7 +14,10 @@
             // canvasの取得
             var stage = new createjs.Stage('stage');
             //画像の登録
-            var manifest =[{src:'img/culcium.png'}];
+            var manifest =[
+                {src:'img/tomato.png'},
+                {src:'img/culcium.png'}
+                ];
 
             //LoadQueue プリロード
             var loadQueue = new createjs.LoadQueue();
@@ -26,6 +29,18 @@
                 console.log('読み込み完了');
 
             });
+
+            //ステージに配置
+            function addStage(){
+                var tomato = new createjs.Bitmap(manifest[0].scr);
+                stage.addChild(tomato);
+                tomato.x = 100;
+                tomato.y = 100;
+                tomato.alpha = 0;
+                createjs.Tween.get(tomato).to({alpha:1},1000);
+
+
+            }
 
 
             createjs.Ticker.addEventListener('tick',tick);
