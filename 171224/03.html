@@ -40,7 +40,22 @@
         //天気を表示する関数
         function setWeather(lat,lon){
 
-            
+            //APIキー 定数　OpenWeather Map
+            const apikey = '2a9eee28aabdc84c9128520db3a519e5';
+            //OpenWeather Map
+            var weatherUrl ='http://api.openweathermap.org/data/2.5/weather?lat='+lat+'&lon='+lon+'&appid='+ apikey;
+
+            //aJax通信
+            $.ajax({
+                url:weatherUrl,
+                dataType:'json'
+            }).done(function(data){
+                //通信成功
+                console.log(data);
+                //通信失敗
+            }).fail(function(){
+                console.log('ajax error');
+            });
 
         }
 
