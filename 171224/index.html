@@ -37,7 +37,7 @@
             $('ul li:eq(2)').text('z: ' + z);
 
             //もしスマホを振ったら
-            if( Math.abs(x) > 10 || Math.abs(y) || Math.abs(z) ){
+            if( Math.abs(x) > 1 || Math.abs(y) || Math.abs(z) ){
                 $('h1').text('振り終わったお');
                 window.removeEventListener('devicemotion',shakeDevice);
             }
