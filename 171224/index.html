@@ -13,19 +13,31 @@
     </ul>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script>
-    //DOMの読み込み
+    // DOMの読み込み
     $(function(){
 
         console.log('読み込んだよ');
 
-        //devicemotion event
+        // devicemotion event
         window.addEventListener('devicemotion',function(evt){
             console.log(evt);
+            // X軸
+            var x = evt.acceleration.x;
+            // Y軸
+            var y = evt.acceleration.y;
+            // Z軸
+            var z = evt.acceleration.z;
+
+            $('ul li:eq(0)').test('x: ' + x);
+            $('ul li:eq(0)').test('x: ' + y);
+            $('ul li:eq(0)').test('x: ' + z);
+
+
+
         });
 
 
     });
-
     </script>
 </body>
 </html>
