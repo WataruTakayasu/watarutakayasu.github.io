@@ -26,15 +26,15 @@
         function orienDevice(evt){
 
             console.log(evt);
-            // // X軸
-            // var x = evt.acceleration.x;
-            // // Y軸
-            // var y = evt.acceleration.y;
-            // // Z軸
-            // var z = evt.acceleration.z;
-            // $('ul li:eq(0)').text('x: ' + x);
-            // $('ul li:eq(1)').text('y: ' + y);
-            // $('ul li:eq(2)').text('z: ' + z);
+            // X軸
+            var x = evt.beta.x;
+            // Y軸
+            var y = evt.gamma.y;
+            // Z軸
+            var z = evt.alpha.z;
+            $('ul li:eq(0)').text('x: ' + x);
+            $('ul li:eq(1)').text('y: ' + y);
+            $('ul li:eq(2)').text('z: ' + z);
 
             }
 
