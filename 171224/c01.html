@@ -18,8 +18,22 @@
             var circle = new createjs.Shape();
             circle.graphics.beginFill('#00FF00').drawCircle(0,0,40);
             stage.addChild(circle); //stageにcircleを配置
-            circle.x = 200;
-            circle.y = 300;
+            circle.x = 50;
+            circle.y = 50;
+            //トゥイーンアニメーション
+            createjs.Tween.get(circle)
+            .to({x:400,y:400,alpha:0.1},1000,createjs.Ease.bounceOut)
+            .wait(500)
+            .to({x:400,y:50,alpha:1},500,createjs.Ease.cubicIn)
+            .wait(1000)
+            .to({x:50,y:50,scaleX:2,scaleY:2},400,createjs.Ease.backOut)
+            .call(nextAnime);
+
+            function nextAnime(){
+                console.log('next animation');
+                circle.scaleX =1;
+                circle.scaleY =1;
+            }
 
             var star = new createjs.Shape();
             star.graphics.beginFill('#FF0000').drawPolyStar(0,0,40,5,0.6,-90);
@@ -32,8 +46,8 @@
             stage.addChild(rect);
             rect.x = 400;
             rect.y = 0;
-            rect.alpha = 0.5;//透明
-            rect.visible = false;
+            //rect.alpha = 0.5;//透明
+            //rect.visible = false;
 
 
             createjs.Ticker.addEventListener('tick',tick);
@@ -41,19 +55,19 @@
             createjs.Ticker.timingMode = createjs.Ticker.RAF_SYNCHED;
 
             function tick(){
-                rect.y += 5;
-                if(rect.y > stage.canvas.width){
-                    rect.y = 0;
-                }
-
-                circle.x += 5;
-                if(circle.x > stage.canvas.width){
-                    circle.x = 0;
-                }
+                // circle.x += 5;
+                // if(circle.x > stage.canvas.width){
+                //     circle.x = 0;
+                // }
 
                 star.rotation += 5;
                 if(star.rotaion >=360){
                     star.rotation = 0;
+                }
+
+                rect.y += 5;
+                if(rect.y > stage.canvas.width){
+                    rect.y = 0;
                 }
 
                 stage.update(); //描画の更新
