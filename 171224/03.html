@@ -8,27 +8,36 @@
 <body>
     <h1>geolocation | GPSのテスト</h1>
     <dl id="weatherMap">
-        <dt>地域名:</dt>
+        <dt>地域名：</dt>
         <dd id="areaName"></dd>
+        <dt>現在の気温</dt>
         <dd id="areaTemp"></dd>
+        <dt>湿度</dt>
+        <dd id="areaHumidity"></dd>
+        <dt>天気</dt>
+        <dd id="areaWeather"></dd>
+        <dd id="weatherIcon"></dd>
     </dl>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script>
     // DOMの読み込み
     $(function(){
-
-        console.log('読み込んだよ');
-
         // GPSからの緯度経度の取得
         navigator.geolocation.getCurrentPosition(function(pos){
+            console.log(pos);
+            var lat = pos.coords.latitude; //緯度
+            var lon = pos.coords.longitude; //経度
+            //lat = calLocation(lat);
+            //lon = calLocation(lon);
+            console.log('lat: ' + lat, 'lon: '+lon);
+            setWeather(lat,lon); //緯度経度を受け渡しする
+        });
         // 天気を表示する関数
         function setWeather(lat,lon){
-
             // Open Weather Map APIキー 定数
             const apikey = '2a9eee2844bdc84c9128520db3a519e5';
             // OpenWeatherMap用のURL
             var weatherUrl = 'https://api.openweathermap.org/data/2.5/weather?lat='+lat+'&lon='+lon+'&appid='+ apikey;
-
             // ajax通信
             $.ajax({
                 url:weatherUrl,
@@ -36,14 +45,22 @@
             }).done(function(data){
                 // 通信成功
                 console.log(data);
-
-                //地域名
+                // 地域名
                 var areaName = data.name;
                 $('#areaName').text(areaName);
-                //気温
-                var areaTemp = data.main.temp;//絶対温度
-                areaTemp = areaTemp - 273.15;//摂氏
+                // 気温
+                var areaTemp = data.main.temp; //絶対温度
+                areaTemp = areaTemp - 273.15; // 摂氏
                 $('#areaTemp').text(Math.round(areaTemp)+'度');
+                // 湿度
+                var areaHumidity = data.main.humidity;
+                $('#areaHumidity').text(areaHumidity+'%');
+                // 天気
+                var areaWeather = data.weather[0].description;
+                $('#areaWeather').text(areaWeather);
+                //天気アイコン
+                var weatherIcon = 'http://openweathermap.org/img/w/'+data.weather[0].icon+'.png';
+                $('#weatherIcon').append('<img src="'+weatherIcon+'">');
 
             }).fail(function(){
                 console.log('ajax error'); //通信失敗
