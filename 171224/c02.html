@@ -8,6 +8,7 @@
     <canvas id="stage" width="500" height="500"></canvas>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
+    <script scr="sprite.js"></script>
     <script>
         // DOMの読み込み
         $(function(){
@@ -27,6 +28,7 @@
             //画像を全部読み込み終わったら
             loadQueue.addEventListener('complete',function(){
                 console.log('読み込み完了');
+                addStage();
 
             });
 
@@ -39,8 +41,15 @@
                 tomato.alpha = 0;
                 createjs.Tween.get(tomato).to({alpha:1},1000);
 
+                //Sprite
+                var calciumSpriteSheet = new createjs.SpriteSheet(calciumSprite);
+                var calcium = new createjs.Sprite(calciumSpriteSheet,'stand');
+                calcium.x = 100;
+                calcium.y = 300;
+
 
             }
+
 
 
             createjs.Ticker.addEventListener('tick',tick);
