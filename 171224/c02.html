@@ -5,51 +5,52 @@
     <title>Canvas</title>
 </head>
 <body>
-    <canvas id="stage" width="500" height="500"></canvas>
+    <canvas id="stage" width="600" height="500"></canvas>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
-    <script scr="sprite.js"></script>
+    <script src="sprite.js"></script>
     <script>
         // DOMの読み込み
         $(function(){
             // canvasの取得
             var stage = new createjs.Stage('stage');
-            //画像の登録
-            var manifest =[
+
+            // 画像の登録
+            var manifest = [
                 {src:'img/tomato.png'},
-                {src:'img/culcium.png'}
-                ];
-
-            //LoadQueue プリロード
+                {src:'img/calcium.png'}
+            ];
+            // loadQueue プリロード
             var loadQueue = new createjs.LoadQueue();
-            //ファイルの指定
+            // ファイルの指定　読み込み開始
             loadQueue.loadManifest(manifest);
-
-            //画像を全部読み込み終わったら
+            // 画像を全部読み込み終わったら
             loadQueue.addEventListener('complete',function(){
                 console.log('読み込み完了');
                 addStage();
-
             });
 
-            //ステージに配置
+            // ステージに配置
             function addStage(){
-                var tomato = new createjs.Bitmap(manifest[0].scr);
+                // Bitmap
+                var tomato = new createjs.Bitmap(manifest[0].src);
                 stage.addChild(tomato);
                 tomato.x = 100;
                 tomato.y = 100;
                 tomato.alpha = 0;
-                createjs.Tween.get(tomato).to({alpha:1},1000);
+                createjs.Tween.get(tomato).wait(500).to({alpha:1},1000);
 
-                //Sprite
+                // sprite
                 var calciumSpriteSheet = new createjs.SpriteSheet(calciumSprite);
                 var calcium = new createjs.Sprite(calciumSpriteSheet,'stand');
-                calcium.x = 100;
+                stage.addChild(calcium);
+                calcium.x = 0;
                 calcium.y = 300;
-                createjs.Tween.get(calcium).wait(1000).to({alfa:1},1000);
-                //クリックしたら
+                calcium.alpha = 0;
+                createjs.Tween.get(calcium).wait(1000).to({alpha:1},1000);
+                // クリックしたら
                 calcium.addEventListener('click',function(){
-                    createjs.Tween.get(calcium).call(calciumWalk).to({x:400},2000);
+                    createjs.Tween.get(calcium).call(calciumWalk).to({x:400},2000).call(calciumStop);
                 })
 
                 function calciumWalk(){
