@@ -30,8 +30,10 @@
             var rect = new createjs.Shape();
             rect.graphics.beginFill('#0000FF').drawRect(0,0,50,50);
             stage.addChild(rect);
-            rect.x = stage.canvas.width/2;
-            rect.y = stage.canvas.height/2;
+            rect.x = 400;
+            rect.y = 0;
+            rect.alpha = 0.5;//透明
+            rect.visible = false;
 
 
             createjs.Ticker.addEventListener('tick',tick);
