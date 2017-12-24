@@ -2,11 +2,11 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <title>deviceorientationのテスト ジャイロのテスト</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>device orientation | ジャイロのテスト</title>
 </head>
 <body>
-    <h1>deviceorientationのテスト ジャイロのテスト</h1>
+    <h1>device orientation | ジャイロのテスト</h1>
     <ul>
         <li></li>
         <li></li>
@@ -22,24 +22,21 @@
         // deviceorientation event ジャイロ
         window.addEventListener('deviceorientation',orienDevice);
 
-        //スマホを振ったら呼び出される関数
+        // スマホを振ったら呼び出される関数
         function orienDevice(evt){
-
             console.log(evt);
             // X軸
-            var x = evt.beta.x;
+            var x = evt.beta;
             // Y軸
-            var y = evt.gamma.y;
+            var y = evt.gamma;
             // Z軸
-            var z = evt.alpha.z;
+            var z = evt.alpha;
+
             $('ul li:eq(0)').text('x: ' + x);
             $('ul li:eq(1)').text('y: ' + y);
             $('ul li:eq(2)').text('z: ' + z);
 
-            }
-
         }
-
 
     });
     </script>
